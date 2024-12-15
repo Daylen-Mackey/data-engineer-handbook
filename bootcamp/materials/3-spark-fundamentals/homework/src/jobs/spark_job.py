@@ -63,21 +63,18 @@ medals_broadcasted_join = df_medal_matches_players.join(broadcast(df_medals), "m
 """
 Question: Bucket join `match_details`, `matches`, and `medal_matches_players` on `match_id` with `16` buckets
 """
-spark.sql("""DROP TABLE IF EXISTS bootcamp.match_details_bucketed""")
 df_match_details.select("match_id", "player_gamertag", "player_total_kills") \
     .write.mode("append") \
     .bucketBy(16, "match_id") \
     .saveAsTable("bootcamp.match_details_bucketed")
 spark.sql(""" select * from bootcamp.match_details_bucketed""").show()
 
-spark.sql("""DROP TABLE IF EXISTS bootcamp.matches_bucketed""")
 df_matches.select("match_id", "mapid", "playlist_id") \
     .write.mode("append") \
     .bucketBy(16, "match_id") \
     .saveAsTable("bootcamp.matches_bucketed")
 spark.sql(""" select * from bootcamp.matches_bucketed""").show()
 
-spark.sql("""DROP TABLE IF EXISTS bootcamp.medal_matches_players_bucketed""")
 df_medal_matches_players.select("match_id", "player_gamertag", "medal_id", "count") \
     .write.mode("append") \
     .bucketBy(16, "match_id") \
