@@ -1,2 +1,4 @@
 .idea/
 .DS_Store
+bootcamp/materials/4-apache-flink-training/example.env
+bootcamp/materials/4-apache-flink-training/homework/submission/sessions_queries.sql
